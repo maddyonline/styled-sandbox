@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 
+import Menu from "./Menu";
+
 const theme = {
   colors: {
     blue: "#1f2d3d",
@@ -39,6 +41,22 @@ const theme = {
   }
 };
 
+const options = [
+  {
+    text: "Make moderator",
+    action: () => null
+  },
+  {
+    text: "Make speaker",
+    action: () => null
+  },
+  {
+    text: "Remove from call",
+    action: () => null,
+    warning: true
+  }
+];
+
 export default ({
   isVisible,
   activateMenu,
@@ -49,25 +67,35 @@ export default ({
   muted,
   isActive,
   isAdmin
-}) => (
-  <Container>
-    <Avatar muted={muted} isActive={isActive}>
-      <AvatarText>
-        {isAdmin ? "admin" : ""}
-        {"MJ"}
-      </AvatarText>
-    </Avatar>
-    <Name>{name}</Name>
-    {accountType !== "LST" && (
-      <AudioIcon>{hasAudio ? <div>M</div> : <div>N</div>}</AudioIcon>
-    )}
-    {activateMenu && (
-      <MenuButton onClick={() => console.log("c")}>
-        <div>X</div>
-      </MenuButton>
-    )}
-  </Container>
-);
+}) => {
+  // const [menu, showMenu] = React.useState(false);
+  //const [a, setA] = React.useState(false);
+  const menu = false;
+  return (
+    <Container>
+      <Avatar muted={muted} isActive={isActive}>
+        <AvatarText>
+          {isAdmin ? "admin" : ""}
+          {"MJ"}
+        </AvatarText>
+      </Avatar>
+      <Name onClick={() => showMenu(!menu)}>{name}</Name>
+      {menu && (
+        <MenuContainer>
+          <Menu options={options} />
+        </MenuContainer>
+      )}
+      {accountType !== "LST" && (
+        <AudioIcon>{hasAudio ? <div>M</div> : <div>N</div>}</AudioIcon>
+      )}
+      {activateMenu && (
+        <MenuButton onClick={() => console.log("c")}>
+          <div>X</div>
+        </MenuButton>
+      )}
+    </Container>
+  );
+};
 
 const AVATAR_DIMENSION = 80;
 
