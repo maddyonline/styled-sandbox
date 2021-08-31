@@ -145,12 +145,15 @@ const Avatar = (props) => {
           <Participant />
         </CanSpeakContainer>
         <Header>Listeners</Header>
-        {"listeners"}
+        <ListeningContainer>
+          <Participant />
+          <Participant />
+        </ListeningContainer>
         <Tray>
           <TrayContent>
-            {["MOD", "SPEAKER"].includes(text) ? (
+            {false ? (
               <AudioButton onClick={() => console.log("audio")}>
-                {true ? <MicIcon type="simple" /> : <MutedIcon type="simple" />}
+                {true ? "mute" : "unmute"}
                 <ButtonText>{true ? "Mute" : "Unmute"}</ButtonText>
               </AudioButton>
             ) : (
